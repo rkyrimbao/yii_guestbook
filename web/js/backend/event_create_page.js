@@ -3,9 +3,9 @@ var EventCreatePageJs = (function($)
 	var init = function(params)
     {
         $('#event-event_date').datetimepicker({
+            default: 'YYYY-MM-DD',
         	format: 'L',
-        	format: 'DD.MM.YYYY',
-		    extraFormats: [ 'DD.MM.YYYY', 'DD.MM.YY' ]
+        	format: 'YYYY-MM-DD',
         });
 
         $('#event-time').datetimepicker({

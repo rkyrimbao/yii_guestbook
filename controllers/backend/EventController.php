@@ -11,6 +11,8 @@ class EventController extends BaseController
 {
 	protected $indexTemplate = 'index';
 	protected $createTemplate = 'create';
+	protected $viewTemplate = 'view';
+	protected $editTemplate = 'edit';
 
     public function actionIndex()
     {
@@ -25,21 +27,47 @@ class EventController extends BaseController
     {
     	$eventModel = new Event();
 
-    	if ($eventModel->load($this->post())) {
-    		$isFormValid = $eventModel->validate();
+    	if ($this->onPost($eventModel)) {
 
-    		if ($isFormValid) {
+    		$this->setFlashEnterySuccess();
 
-    			$eventModel->save();
-
-    			$this->setFlashEnterySuccess();
-
-    			return $this->redirect(['/admin/events']);
-    		}
+    		return $this->redirect(['/admin/events']);
     	}
 
     	return $this->render($this->createTemplate, array(
     		'eventModel' => $eventModel
     	));
+    }
+
+    public function actionView()
+    {
+    	$eventId = $this->getEvent();
+
+    	$event = Event::findOne($eventId);
+    	
+    	return $this->render($this->viewTemplate, array(
+        	'event' => $event
+        ));
+    }
+
+    public function actionEdit()
+    {
+    	$event = $this->getEvent();
+
+    	if ($this->onPost($event)) {
+
+    		$this->setFlashEnterySuccess();
+
+    		return $this->redirect(['/admin/events']);
+    	}
+
+    	return $this->render($this->editTemplate, array(
+        	'event' => $event
+        ));
+    }
+
+    protected function getEvent()
+    {
+    	return Event::findOne($this->getAppRequest()->getQueryParam('eventId'));
     }
 }

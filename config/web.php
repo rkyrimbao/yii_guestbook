@@ -81,6 +81,8 @@ $config = [
                 '/admin/guests' => 'backend/guest',
                 '/admin/events' => 'backend/event',
                 '/admin/events/create' => 'backend/event/create',
+                '/admin/events/<eventId:\d+>/view' => 'backend/event/view',
+                '/admin/events/<eventId:\d+>/edit' => 'backend/event/edit',
                 '/admin/reports' => 'backend/report'
             ],
         ],

@@ -26,8 +26,8 @@
 			<td><?= date("F j, Y", strtotime($event->event_date)); ?></td>
 			<td><?= $event->time ?></td>
 			<td>
-				<a href="" class="btn btn-outline-primary btn-sm">View</a>
-				<a href="" class="btn btn-outline-secondary btn-sm">Edit</a>
+				<a href="<?= sprintf('/admin/events/%d/view', $event->id) ?>" class="btn btn-outline-primary btn-sm">View</a>
+				<a href="<?= sprintf('/admin/events/%d/edit', $event->id) ?>" class="btn btn-outline-secondary btn-sm">Edit</a>
 				<a href="" class="btn btn-outline-danger btn-sm">Delete</a>
 			</td>
 		</tr>

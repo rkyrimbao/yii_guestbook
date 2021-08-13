@@ -17,4 +17,31 @@ class BaseController extends \yii\web\Controller
 	{
 		Yii::$app->session->setFlash('entrySuccess');
 	}
+
+	public function getAppRequest()
+	{
+		return Yii::$app->getRequest();
+	}
+
+	public function getAppReferrer()
+	{
+		return Yii::$app->request->referrer;
+	}
+
+	public function onPost($model)
+    {
+    	if ($model->load($this->post())) {
+
+    		$isFormValid = $model->validate();
+
+    		if ($isFormValid) {
+
+    			$model->save();
+
+    			return true;
+    		}
+    	}
+
+    	return false;
+    }
 }
