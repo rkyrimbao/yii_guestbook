@@ -1,12 +1,16 @@
 <?php
 
+defined('YII_DEBUG') or define('YII_DEBUG', true);
+
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
 
-$config = [
+$config = [ 
     'id' => 'basic',
+    'name' => 'Guestbook Registration',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defaultRoute' => 'frontend/default' ,
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -43,14 +47,49 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+        'assetManager' => [
+            // override bundles to use CDN :
+            'bundles' => [
+                'yii\bootstrap4\BootstrapAsset' => [
+                    'sourcePath' => null,
+                    'baseUrl' => 'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1',
+                    'css' => [
+                        'css/bootstrap.min.css'
+                    ],
+                ],
+                'yii\bootstrap4\BootstrapPluginAsset' => [
+                    'sourcePath' => null,
+                    'baseUrl' => 'https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1',
+                    'js' => [
+                        'js/bootstrap.min.js',
+                    ],
+                ],
+                'yii\bootstrap4\BootstrapThemeAsset' => [
+                    'sourcePath' => null,
+                    'baseUrl' => null,
+                    'css' => []
+                ],
+            ],
+        ],
+        
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
+            // 'enableStrictParsing' => false,
             'rules' => [
+                '/admin' => 'backend/dashboard',
+                '/admin/guests' => 'backend/guest',
+                '/admin/events' => 'backend/event',
+                '/admin/events/create' => 'backend/event/create',
+                '/admin/reports' => 'backend/report'
             ],
         ],
-        */
+        // 'behaviors'=>array(
+        //     'runEnd'=>array(
+        //         'class'=>'app\components\WebApplicationEndBehavior',
+        //     ),
+        // ),
+        
     ],
     'params' => $params,
 ];
