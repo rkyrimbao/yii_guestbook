@@ -11,8 +11,11 @@ $this->title = sprintf('Viewing %s', $event->name);
 <div class="row justify-content-center">
 	<div class="col-6"><h1><?= sprintf('Viewing Event: %s', $event->name) ?></h1></div>
 	<div class="col-6 text-right">
-		<a href="<?= sprintf('/admin/events/%d/edit', $event->id) ?>" class="btn btn-outline-secondary btn-sm">Edit</a>
-		<a href="" class="btn btn-outline-danger btn-sm">Delete</a>
+		<?= 
+			\Yii::$app->view->renderFile('@app/views/backend/event/partial/action.php', array(
+				'model' => $event
+			));
+		?>
 	</div>
 </div>
 <br>

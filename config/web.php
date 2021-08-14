@@ -75,21 +75,28 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            // 'enableStrictParsing' => false,
+            'enableStrictParsing' => false,
             'rules' => [
+                # Note: camelCase model Controller isn't working here
                 '/admin' => 'backend/dashboard',
                 # Guests
                 '/admin/guests' => 'backend/registration',
                 '/admin/guests/add' => 'backend/registration/add',
                 '/admin/guests/<guestId:\d+>/edit' => 'backend/registration/edit',
                 '/admin/guests/<guestId:\d+>/view' => 'backend/registration/view',
+                '/admin/guests/<guestId:\d+>/delete' => 'backend/registration/delete',
                 # Events
                 '/admin/events' => 'backend/event',
                 '/admin/events/create' => 'backend/event/create',
                 '/admin/events/<eventId:\d+>/view' => 'backend/event/view',
                 '/admin/events/<eventId:\d+>/edit' => 'backend/event/edit',
+                '/admin/events/<eventId:\d+>/delete' => 'backend/event/delete',
                 # Reports
-                '/admin/reports' => 'backend/report'
+                '/admin/reports' => 'backend/report',
+                # Registered Event
+                # camelcase not working
+                #'/admin/registration-events/index' => 'backend/registrationEvent',
+                '/admin/registration-events/<id:\d+>/delete' => 'backend/registrationevent/delete',
             ],
         ],
         // 'behaviors'=>array(

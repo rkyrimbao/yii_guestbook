@@ -13,9 +13,19 @@ class BaseController extends \yii\web\Controller
 		return Yii::$app->request->post();
 	}
 
-	public function setFlashEnterySuccess()
+	public function setFlashEntryFail($message = '')
 	{
-		Yii::$app->session->setFlash('entrySuccess');
+		Yii::$app->session->setFlash('entryFail', $message);
+	}
+
+	public function setFlashEntryNotify($message = '')
+	{
+		Yii::$app->session->setFlash('entryNotify', $message);
+	}
+
+	public function setFlashEntrySuccess($message = '')
+	{
+		Yii::$app->session->setFlash('entrySuccess', $message);
 	}
 
 	public function getAppRequest()

@@ -52,7 +52,11 @@ AppAsset::register($this);
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
-        <?= Alert::widget() ?>
+        
+        <?= 
+            \Yii::$app->view->renderFile('@app/views/backend/common/partial/flash_message.php');
+        ?>
+
         <?= $content ?>
     </div>
 </main>

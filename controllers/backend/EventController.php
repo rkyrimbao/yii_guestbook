@@ -4,6 +4,7 @@ namespace app\controllers\backend;
 
 use app\controllers\backend\BaseController;
 use app\models\Event;
+use app\models\RegistrationEvent;
 
 use yii\db\Query;
 
@@ -29,7 +30,7 @@ class EventController extends BaseController
 
     	if ($this->onPost($eventModel)) {
 
-    		$this->setFlashEnterySuccess();
+    		$this->setFlashEntrySuccess();
 
     		return $this->redirect(['/admin/events']);
     	}
@@ -56,7 +57,7 @@ class EventController extends BaseController
 
     	if ($this->onPost($event)) {
 
-    		$this->setFlashEnterySuccess();
+    		$this->setFlashEntrySuccess();
 
     		return $this->redirect(['/admin/events']);
     	}
@@ -66,6 +67,25 @@ class EventController extends BaseController
         ));
     }
 
+    public function actionDelete()
+    {
+        $event = $this->getEvent();
+
+        $activeEvents = RegistrationEvent::findAll(['event_id' => $event->id]);
+
+        if (!empty($activeEvents)) {
+            $this->setFlashEntryNotify(sprintf('Event %s cannot be deleted due to this event still active.', $event->name));
+            return $this->redirect(['/admin/events']);
+        }
+        else {
+            $this->setFlashEntrySuccess();
+            $event->delete();
+        }
+
+        return $this->redirect($this->getAppReferrer() ?: 'admin/events');
+
+    }
+    
     protected function getEvent()
     {
     	return Event::findOne($this->getAppRequest()->getQueryParam('eventId'));

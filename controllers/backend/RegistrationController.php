@@ -13,6 +13,7 @@ class RegistrationController extends BaseController
 	protected $indexTemplate = 'index';
 	protected $addTemplate = 'add';
 	protected $editTemplate = 'edit';
+    protected $viewTemplate = 'view';
 
     public function actionIndex()
     {
@@ -57,7 +58,7 @@ class RegistrationController extends BaseController
                     }
                 }
 
-    			$this->setFlashEnterySuccess();
+    			$this->setFlashEntrySuccess('Guest successfully created.');
 
     			return $this->redirect(['/admin/guests']);
     		}
@@ -144,7 +145,7 @@ class RegistrationController extends BaseController
 					RegistrationEvent::deleteAll(['registration_id' => $guest->id]);
 				}
 				
-    			$this->setFlashEnterySuccess();
+    			$this->setFlashEntrySuccess('Guest successfully updated.');
 
     			return $this->redirect(['/admin/guests']);
     		}
@@ -156,6 +157,35 @@ class RegistrationController extends BaseController
     		'events' => $events,
     		'eventOptions' => $eventOptions
     	));
+    }
+
+    public function actionDelete()
+    {
+        $guest = $this->getGuest();
+
+        $selectedEvents = RegistrationEvent::findAll(['registration_id' => $guest->id]);
+
+        if (!empty($selectedEvents)) {
+            $this->setFlashEntryFail(sprintf('Failed to delete guest %s %s due to active registered events, delete the events of guest first', $guest->first_name, $guest->last_name));
+        }
+        else {
+            $this->setFlashEntrySuccess('Guest successfully removed.');
+            $guest->delete();
+        }
+
+        return $this->redirect($this->getAppReferrer() ?: '/admin/guests');
+    }
+
+    public function actionView()
+    {
+        $guest = $this->getGuest();
+
+        $selectedEvents = RegistrationEvent::findAll(['registration_id' => $guest->id]);
+        
+        return $this->render($this->viewTemplate, array(
+            'guest' => $guest,
+            'selectedEvents' => $selectedEvents
+        ));
     }
 
     protected function getGuest()
