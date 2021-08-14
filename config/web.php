@@ -78,11 +78,17 @@ $config = [
             // 'enableStrictParsing' => false,
             'rules' => [
                 '/admin' => 'backend/dashboard',
-                '/admin/guests' => 'backend/guest',
+                # Guests
+                '/admin/guests' => 'backend/registration',
+                '/admin/guests/add' => 'backend/registration/add',
+                '/admin/guests/<guestId:\d+>/edit' => 'backend/registration/edit',
+                '/admin/guests/<guestId:\d+>/view' => 'backend/registration/view',
+                # Events
                 '/admin/events' => 'backend/event',
                 '/admin/events/create' => 'backend/event/create',
                 '/admin/events/<eventId:\d+>/view' => 'backend/event/view',
                 '/admin/events/<eventId:\d+>/edit' => 'backend/event/edit',
+                # Reports
                 '/admin/reports' => 'backend/report'
             ],
         ],

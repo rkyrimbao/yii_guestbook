@@ -20,32 +20,40 @@ class DefaultController extends \yii\web\Controller
 	public function actionIndex()
 	{
 		$registration = new Registration();
-        $registrationEvent = new RegistrationEvent();
         
         $events = Event::find()->all();
 
-        $postData = Yii::$app->request->post();
-
         $eventsData = array();
 
-		if ($registration->load($postData)) {
+		if ($registration->load(Yii::$app->request->post())) {
+
             $isFormValid = $registration->validate();
-            
+
+            $postData = Yii::$app->request->post();
+
             $eventsData = array_filter($postData['events']);
+
+            $eventsData = array_values($eventsData);
 
             if ($isFormValid) {
 
                 $registration->save();
 
                 if (!empty($eventsData)) {
-                    foreach ($eventsData as $key =>$eventData) {
+                    
+                    foreach ($eventsData as $key => $eventId) {
+
+                        $registrationEvent = new RegistrationEvent();
+
                         $registrationEvent->registration_id = $registration->id;
-                        $registrationEvent->event_id = $eventData;
+
+                        $registrationEvent->event_id = $eventId;
+
+                        $registrationEvent->save();
                     }
-
-                    $registrationEvent->save();
+                    
                 }
-
+                
                 Yii::$app->session->setFlash('entryConfirmed');
 
                 return $this->refresh();
@@ -54,31 +62,8 @@ class DefaultController extends \yii\web\Controller
 
         return $this->render($this->indexTemplate, array(
             'registration' => $registration,
-            'registrationEvent' => $registrationEvent,
             'events' => $events,
             'eventsData' => $eventsData
         ));
 	}
-
-    // public function actionIndex()
-    // {	
-    // 	$registrationModel = new Registration();
-
-    // 	$postData = Yii::$app->request->post();
-
-    // 	if ($registrationModel->load($postData)) {
-
-    // 		$isFormValid = $registrationModel->validate();
-
-    // 		if ($isFormValid) {
-    // 			$registrationModel->save();
-    // 			Yii::$app->session->setFlash('entryConfirmed');
-    // 			return $this->refresh();
-    // 		}
-    // 	}
-    
-    //     return $this->render($this->indexTemplateName, array(
-    //     	'registrationModel' => $registrationModel
-    //     ));
-    // }
 }

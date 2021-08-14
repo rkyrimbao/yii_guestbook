@@ -18,9 +18,8 @@ use yii\helpers\ArrayHelper;
 
 <?php endif; ?>
 
-<?php $form = ActiveForm::begin(['id' => 'registration-form']); 
+<?php $form = ActiveForm::begin(['id' => 'registration-form', 'options' => ['autocomplete' => 'off']]); 
 	// $form->errorSummary($registration);
-	// $form->errorSummary($registrationEvent);
 	// var_dump($eventsData);
 ?>
 <div class="row">
@@ -56,7 +55,7 @@ use yii\helpers\ArrayHelper;
 					<div class="col-md-4">
 						<?= 
 							$form->field($registration, 'gender')
-								->dropDownList(['1' => 'Male', '0' => 'Female'],['prompt'=>'Select Gender'])
+								->dropDownList(['Male' => 'Male', 'Female' => 'Female'],['prompt'=>'Select Gender'])
 								->label(false)
 						?>
 					</div>
@@ -81,7 +80,7 @@ use yii\helpers\ArrayHelper;
 				?>
 
 				<?= 
-					$form->field($registration, 'zip_code')
+					$form->field($registration, 'zipcode')
 						->input('text', ['placeholder' => 'Zip Code', 'class' => 'form-control'])
 						->label(false)
 				?>

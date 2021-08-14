@@ -16,7 +16,7 @@ use Yii;
  * @property string $street
  * @property string $city
  * @property string $country
- * @property int $zip_code
+ * @property int $zipcode
  *
  * @property RegistrationEvent[] $registrationEvents
  */
@@ -36,9 +36,9 @@ class Registration extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['first_name', 'last_name', 'email_address', 'gender', 'street', 'city', 'country', 'zip_code'], 'required'],
+            [['first_name', 'last_name', 'email_address', 'gender', 'street', 'city', 'country', 'zipcode'], 'required'],
             [['street'], 'string'],
-            [['zip_code'], 'integer'],
+            [['zipcode'], 'integer'],
             [['first_name', 'last_name', 'email_address', 'phone_number', 'city', 'country'], 'string', 'max' => 45],
             ['email_address', 'email'],
             ['email_address', 'unique', 'message' => 'Email address already exists'],
@@ -61,7 +61,7 @@ class Registration extends \yii\db\ActiveRecord
             'street' => 'Street',
             'city' => 'City',
             'country' => 'Country',
-            'zip_code' => 'Zip Code',
+            'zipcode' => 'Zipcode',
         ];
     }
 

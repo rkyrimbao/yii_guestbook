@@ -19,7 +19,7 @@ $this->registerCssFile('@web/css/plugins/tempusdominus-bootstrap-4.min.css', ['p
 	<div class="col-6">
 		<h1>Create Event</h1>
 		
-		<?php $form = ActiveForm::begin(['id' => 'registration-form', 'options' => ['autocomplete' => 'off']]); ?>	    
+		<?php $form = ActiveForm::begin(['id' => 'event-form', 'options' => ['autocomplete' => 'off']]); ?>	    
 			<div class="form-group">
 				<?= 
 					$form
