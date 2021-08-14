@@ -40,10 +40,13 @@ $this->title = 'Guests';
 				</i></small>
 			</td>
 			<td><?= $guest->gender ?></td>
-			<td>
-				<a href="<?= sprintf('/admin/guests/%d/view', $guest->id) ?>" class="btn btn-outline-primary btn-sm">View</a>
-				<a href="<?= sprintf('/admin/guests/%d/edit', $guest->id) ?>" class="btn btn-outline-secondary btn-sm">Edit</a>
-				<a href="<?= sprintf('/admin/guests/%d/delete', $guest->id) ?>" class="btn btn-outline-danger btn-sm">Delete</a>
+			<td class="text-right">
+				<?=
+					\Yii::$app->view->renderFile('@app/views/backend/registration/partial/action.php', array(
+						'model' => $guest,
+						'isViewButtonVisible' => true
+					));
+				?>
 			</td>
 		</tr>
 		<?php endforeach; ?>

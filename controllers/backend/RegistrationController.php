@@ -166,7 +166,7 @@ class RegistrationController extends BaseController
         $selectedEvents = RegistrationEvent::findAll(['registration_id' => $guest->id]);
 
         if (!empty($selectedEvents)) {
-            $this->setFlashEntryFail(sprintf('Failed to delete guest %s %s due to active registered events, delete the events of guest first', $guest->first_name, $guest->last_name));
+            $this->setFlashEntryFail(sprintf('Failed to delete guest %s %s due to active participating events, delete the guest from event first', $guest->first_name, $guest->last_name));
         }
         else {
             $this->setFlashEntrySuccess('Guest successfully removed.');
@@ -179,6 +179,10 @@ class RegistrationController extends BaseController
     public function actionView()
     {
         $guest = $this->getGuest();
+
+        if (is_null($guest)) {
+            return $this->redirect('/admin/guests');
+        }
 
         $selectedEvents = RegistrationEvent::findAll(['registration_id' => $guest->id]);
         

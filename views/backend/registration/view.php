@@ -11,6 +11,11 @@ $this->title = sprintf('Viewing Guest: %s', sprintf('%s %s', $guest->first_name,
 <div class="row justify-content-center">
 	<div class="col-8"><h1>View Guest Record</h1></div>
 	<div class="col-4 text-right">
+		<?= 
+			\Yii::$app->view->renderFile('@app/views/backend/registration/partial/action.php', array(
+				'model' => $guest
+			));
+		?>
 	</div>
 </div>
 
