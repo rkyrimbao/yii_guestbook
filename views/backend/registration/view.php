@@ -46,7 +46,7 @@ $this->title = sprintf('Viewing Guest: %s', sprintf('%s %s', $guest->first_name,
 						<div class="row justify-content-center">
 							<div class="col text-right">
 								<small>
-									<a href="<?= sprintf('/admin/registration-events/%d/delete', $selectedEvent->id) ?>" class="btn btn-outline-danger btn-sm">Delete</a>
+									<a href="<?= sprintf('/admin/registration-events/%d/delete-guest-event', $selectedEvent->id) ?>" class="btn btn-outline-danger btn-sm">Delete</a>
 								</small>
 							</div>
 						</div>

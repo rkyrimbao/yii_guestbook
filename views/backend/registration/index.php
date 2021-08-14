@@ -32,7 +32,7 @@ $this->title = 'Guests';
 		<tr>
 			<th scope="row"><?= $guest->id ?></th>
 			<td>
-				<p><strong><?= $guest->first_name. ' '. $guest->last_name ?></strong></p>
+				<p><strong><?= ucwords(strtolower($guest->first_name. ' '. $guest->last_name)) ?></strong></p>
 				<small><i>
 					<?= sprintf('%s, %s, %s %s', $guest->street, $guest->city, $guest->country, $guest->zipcode) ?><br>
 					<?= $guest->email_address ?><br>

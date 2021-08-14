@@ -42,12 +42,13 @@ class EventController extends BaseController
 
     public function actionView()
     {
-    	$eventId = $this->getEvent();
+    	$event = $this->getEvent();
 
-    	$event = Event::findOne($eventId);
-    	
+    	$participatingGuests = RegistrationEvent::findAll(['event_id' => $event]);
+
     	return $this->render($this->viewTemplate, array(
-        	'event' => $event
+        	'event' => $event,
+            'participatingGuests' => $participatingGuests
         ));
     }
 
@@ -74,11 +75,11 @@ class EventController extends BaseController
         $activeEvents = RegistrationEvent::findAll(['event_id' => $event->id]);
 
         if (!empty($activeEvents)) {
-            $this->setFlashEntryNotify(sprintf('Event %s cannot be deleted due to this event still active.', $event->name));
+            $this->setFlashEntryNotify(sprintf('Event %s cannot be deleted, remove the participating guest first', $event->name));
             return $this->redirect(['/admin/events']);
         }
         else {
-            $this->setFlashEntrySuccess();
+            $this->setFlashEntrySuccess('Event successfull removed.');
             $event->delete();
         }
 

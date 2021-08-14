@@ -96,7 +96,8 @@ $config = [
                 # Registered Event
                 # camelcase not working
                 #'/admin/registration-events/index' => 'backend/registrationEvent',
-                '/admin/registration-events/<id:\d+>/delete' => 'backend/registrationevent/delete',
+                '/admin/registration-events/<id:\d+>/delete-guest-event' => 'backend/registrationevent/deleteguestevent',
+                '/admin/registration-events/<id:\d+>/delete-event-guest' => 'backend/registrationevent/deleteeventguest',
             ],
         ],
         // 'behaviors'=>array(

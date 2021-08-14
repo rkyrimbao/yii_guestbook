@@ -15,7 +15,22 @@ class RegistrationeventController extends BaseController
          return $this->render('index');
     }
 
-	public function actionDelete()
+	public function actionDeleteguestevent()
+    {
+        $registeredEvent = $this->getRegistrationEvent();
+
+        if (!is_null($registeredEvent)) {
+            $this->setFlashEntrySuccess(sprintf('Event %s is successfully removed', $registeredEvent->event->name));
+            $registeredEvent->delete();
+        }
+        else {
+            $this->setFlashEntryNotify(sprintf('Failed to delete event %s', $registeredEvent->event->name));   
+        }
+
+        return $this->redirect($this->getAppReferrer() ?: '/admin');
+    }
+
+    public function actionDeleteeventguest()
     {
         $registeredEvent = $this->getRegistrationEvent();
 
