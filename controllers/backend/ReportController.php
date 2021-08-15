@@ -88,6 +88,8 @@ class ReportController extends BaseController
             ]
         ]);
 
-        $file->send('event-reports.xlsx');
+        $filename = 'event_reports_' . date('Ymd_hi').'.xlsx'; 
+
+        $file->send($filename);
     }
 }
