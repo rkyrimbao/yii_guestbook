@@ -8,13 +8,15 @@ $this->title = sprintf('Viewing %s', $event->name);
 
 ?>
 
+<?php $eventStatuses = $event->getStatusChoices(); ?>
 
 <div class="row justify-content-center">
 	<div class="col-8"><h1>Viewing Event</h1></div>
 	<div class="col-4 text-right">
 		<?= 
 			\Yii::$app->view->renderFile('@app/views/backend/event/partial/action.php', array(
-				'model' => $event
+				'model' => $event,
+				'eventStatuses' => $eventStatuses
 			));
 		?>
 	</div>

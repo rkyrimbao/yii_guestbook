@@ -32,22 +32,10 @@
 				<?= 
 					\Yii::$app->view->renderFile('@app/views/backend/event/partial/action.php', array(
 						'isViewButtonVisible' => true,
-						'model' => $event
+						'model' => $event,
+						'eventStatuses' => $eventStatuses
 					));
 				?>
-
-				<?php if ($eventStatuses[$event->is_published] == 'Published') : ?>
-					<a 
-						href="<?= sprintf('/admin/events/%s/unpublish', $event->id) ?>" 
-						class="btn btn-outline-dark btn-sm"
-					>Unpublish</button>
-				<?php else : ?>
-					<a 
-						href="<?= sprintf('/admin/events/%s/publish', $event->id) ?>"
-						class="btn btn-outline-success btn-sm"
-					>Publish</button>
-				<?php endif; ?>
-
 			</td>
 		</tr>
 		<?php endforeach; ?>
