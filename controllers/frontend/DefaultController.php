@@ -35,9 +35,10 @@ class DefaultController extends \yii\web\Controller
 
             $postData = Yii::$app->request->post();
 
-            $eventsData = array_filter($postData['events']);
-
-            $eventsData = array_values($eventsData);
+            if (isset($postData['events'])) {
+                $eventsData = array_filter($postData['events']);
+                $eventsData = array_values($eventsData);
+            }
 
             if ($isFormValid) {
 

@@ -29,12 +29,17 @@ use yii\helpers\ArrayHelper;
 	</div>
 	<div class="col-4">
 		<h4>Event Details</h4>
-		<?= 
-			\Yii::$app->view->renderFile('@app/views/backend/registration/partial/form_field_events.php', array(
-				'events' => $events,
-				'eventOptions' => $eventOptions
-			));
-		?>
+
+		<?php if (!empty($events)) : ?>
+			<?= 
+				\Yii::$app->view->renderFile('@app/views/backend/registration/partial/form_field_events.php', array(
+					'events' => $events,
+					'eventOptions' => $eventOptions
+				));
+			?>
+		<?php else: ?>
+			No available events yet.
+		<?php endif; ?>
 	</div>
 </div>
 <div class="form-group">

@@ -26,7 +26,11 @@ class RegistrationController extends BaseController
 
     public function actionAdd()
     {
-    	$events = Event::find()->all();
+    	$events = Event::find()
+            ->where(['is_published' => Event::STATUS_PUBLISHED])
+            ->orderBy([new \yii\db\Expression("event_date asc")])
+            ->all();
+            
     	$eventOptions = array();
 
     	$guest = new Registration();
@@ -37,8 +41,10 @@ class RegistrationController extends BaseController
 
     		$postData = $this->post();
 
-    		$eventOptions = array_filter($postData['events']);
-    		$eventOptions = array_values($eventOptions);
+    		if (isset($postData['events'])) {
+                $eventOptions = array_filter($postData['events']);
+                $eventOptions = array_values($eventOptions);
+            }
 
     		if ($isFormValid) {
 
@@ -73,7 +79,10 @@ class RegistrationController extends BaseController
 
     public function actionEdit()
     {
-    	$events = Event::find()->all();
+    	$events = Event::find()
+            ->where(['is_published' => Event::STATUS_PUBLISHED])
+            ->orderBy([new \yii\db\Expression("event_date asc")])
+            ->all();
     
     	$guest = $this->getGuest();
 
@@ -94,8 +103,10 @@ class RegistrationController extends BaseController
 
     		$postData = $this->post();
 
-    		$eventOptions = array_filter($postData['events']);
-    		$eventOptions = array_values($eventOptions);
+    		if (isset($postData['events'])) {
+                $eventOptions = array_filter($postData['events']);
+                $eventOptions = array_values($eventOptions);
+            }
 
     		if ($isFormValid) {
 
