@@ -27,23 +27,23 @@ AppAsset::register($this);
 
 <header>
     <?php
-    NavBar::begin([
-        'brandLabel' => 'Control Panel',
-        'brandUrl' => '/admin',
-        'options' => [
-            'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
-        ],
-    ]);
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav'],
-        'items' => [
-            ['label' => 'Home', 'url' => ['/admin']],
-            ['label' => 'Events', 'url' => ['/admin/events']],
-            ['label' => 'Guests', 'url' => ['/admin/guests']],
-            ['label' => 'Reports', 'url' => ['/admin/reports']],
-        ],
-    ]);
-    NavBar::end();
+    // NavBar::begin([
+    //     'brandLabel' => 'Control Panel',
+    //     'brandUrl' => '/admin',
+    //     'options' => [
+    //         'class' => 'navbar navbar-expand-md navbar-dark bg-dark fixed-top',
+    //     ],
+    // ]);
+    // echo Nav::widget([
+    //     'options' => ['class' => 'navbar-nav'],
+    //     'items' => [
+    //         ['label' => 'Home', 'url' => ['/admin']],
+    //         ['label' => 'Events', 'url' => ['/admin/events']],
+    //         ['label' => 'Guests', 'url' => ['/admin/guests']],
+    //         ['label' => 'Reports', 'url' => ['/admin/reports']],
+    //     ],
+    // ]);
+    // NavBar::end();
     ?>
 </header>
 
