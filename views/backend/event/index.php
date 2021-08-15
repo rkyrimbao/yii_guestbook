@@ -1,12 +1,15 @@
-<div>
-	<a href="/admin/events/create" class="btn btn-primary">Create Event</a>
+<div class="row justify-content-center">
+	<div class="col-6"><h1>Events</h1></div>
+	<div class="col-6 text-right">
+		<a href="/admin/events/create" class="btn btn-primary">Create Event</a>
+	</div>
 </div>
 
-<br>
+<hr>
 
 <table class="table">
 	<caption>List of Events</caption>
-	<thead>
+	<thead class="thead-light">
 		<tr>
 			<th scope="col">#</th>
 			<th scope="col">Event Name</th>

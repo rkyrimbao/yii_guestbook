@@ -17,6 +17,8 @@ $this->title = 'Guests';
 	</div>
 </div>
 
+<hr>
+
 <table class="table">
 	<caption>List of Guests</caption>
 	<thead class="thead-light">
