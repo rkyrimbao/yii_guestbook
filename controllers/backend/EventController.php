@@ -22,7 +22,7 @@ class EventController extends BaseController
 
         return $this->render($this->indexTemplate, array(
         	'events' => $events,
-            'eventStatusChoices' => Event::getStatusChoices()
+            // 'eventStatusChoices' => Event::getStatusChoices()
         ));
     }
 
@@ -97,7 +97,7 @@ class EventController extends BaseController
 
             $this->setFlashEntrySuccess('Event successfully published');
 
-            $event->status = Event::STATUS_PUBLISHED;
+            $event->is_published = Event::STATUS_PUBLISHED;
             $event->save(false);
 
         }
@@ -114,7 +114,7 @@ class EventController extends BaseController
 
         try {
 
-            $event->status = Event::STATUS_UNPUBLISHED;
+            $event->is_published = Event::STATUS_UNPUBLISHED;
             $event->save(false);
 
             $this->setFlashEntrySuccess('Event successfully unpublished');

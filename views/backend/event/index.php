@@ -20,19 +20,14 @@
 	<tbody>
 		<?php foreach($events as $key => $event): ?>
 
+		<?php $eventStatuses = $event->getStatusChoices(); ?>
 		<tr>
 			<th scope="row"><?= $event->id ?></th>
 			<td><?= $event->name ?></td>
 			<td><?= $event->location ?></td>
 			<td><?= date("F j, Y", strtotime($event->event_date)); ?></td>
 			<td><?= $event->time ?></td>
-			<td>
-				<?php if ($event->status == \Yii::$app->params['STATUS_PUBLISHED']) : ?>
-					Published
-				<?php else : ?>
-					Unpublish
-				<?php endif; ?>
-			</td>
+			<td><?= $eventStatuses[$event->is_published] ?></td>
 			<td>
 				<?= 
 					\Yii::$app->view->renderFile('@app/views/backend/event/partial/action.php', array(
@@ -41,7 +36,7 @@
 					));
 				?>
 
-				<?php if ($event->status == \Yii::$app->params['STATUS_PUBLISHED']) : ?>
+				<?php if ($eventStatuses[$event->is_published] == 'Published') : ?>
 					<a 
 						href="<?= sprintf('/admin/events/%s/unpublish', $event->id) ?>" 
 						class="btn btn-outline-dark btn-sm"

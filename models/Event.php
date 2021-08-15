@@ -7,8 +7,8 @@ use app\models\BaseEvent;
 
 class Event extends BaseEvent
 {
-    const STATUS_UNPUBLISHED = 1;
-    const STATUS_PUBLISHED = 2;
+    const STATUS_UNPUBLISHED = 0;
+    const STATUS_PUBLISHED = 1;
 
     /**
      * {@inheritdoc}
@@ -22,10 +22,10 @@ class Event extends BaseEvent
         ]);
     }
 
-    public static function getStatusChoices()
+    public function getStatusChoices()
     {
         return [
-            self::STATUS_UNPUBLISHED => 'Published',
+            self::STATUS_UNPUBLISHED => 'Unpublished',
             self::STATUS_PUBLISHED => 'Published'
         ];
     }

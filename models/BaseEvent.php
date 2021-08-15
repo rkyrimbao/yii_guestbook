@@ -12,7 +12,7 @@ use Yii;
  * @property string $location
  * @property string $event_date
  * @property string $time
- * @property int|null $status
+ * @property int|null $is_published
  *
  * @property RegistrationEvent[] $registrationEvents
  */
@@ -35,7 +35,7 @@ class BaseEvent extends \yii\db\ActiveRecord
             [['name', 'location', 'event_date', 'time'], 'required'],
             [['location'], 'string'],
             [['event_date'], 'safe'],
-            [['status'], 'integer'],
+            [['is_published'], 'integer'],
             [['name', 'time'], 'string', 'max' => 45],
         ];
     }
@@ -51,7 +51,7 @@ class BaseEvent extends \yii\db\ActiveRecord
             'location' => 'Location',
             'event_date' => 'Event Date',
             'time' => 'Time',
-            'status' => 'Status',
+            'is_published' => 'Is Published',
         ];
     }
 
