@@ -95,7 +95,8 @@ $config = [
                 '/admin/events/<eventId:\d+>/publish' => 'backend/event/publish',
                 # Reports
                 '/admin/reports' => 'backend/report',
-                '/admin/reports/<page:\d+>/page' => 'backend/report',
+                '/admin/reports/export-to-excel' => 'backend/report/exporttoxcel',
+                #'/admin/reports/<page:\d+>/page' => 'backend/report',
                 # Registered Event
                 # camelcase not working
                 #'/admin/registration-events/index' => 'backend/registrationEvent',

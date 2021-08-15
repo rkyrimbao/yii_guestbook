@@ -48,4 +48,13 @@ return array (
       '@yii/faker' => $vendorDir . '/yiisoft/yii2-faker/src',
     ),
   ),
+  'codemix/yii2-excelexport' => 
+  array (
+    'name' => 'codemix/yii2-excelexport',
+    'version' => '2.7.2.0',
+    'alias' => 
+    array (
+      '@codemix/excelexport' => $vendorDir . '/codemix/yii2-excelexport/src',
+    ),
+  ),
 );

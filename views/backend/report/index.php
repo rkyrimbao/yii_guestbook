@@ -12,7 +12,7 @@ $rowsPerPage90 = 90;
 <div class="row justify-content-center">
 	<div class="col-6"><h1>Reports</h1></div>
 	<div class="col-6 text-right">
-		<a href="" class="btn btn-primary">Export to Excel</a>
+		<a href="<?= sprintf('/admin/reports/export-to-excel?page=%s&per-page=%s', $page, $rowsPerPage) ?>" class="btn btn-primary">Export to Excel</a>
 	</div>
 </div>
 
