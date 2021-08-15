@@ -32,7 +32,7 @@ class EventController extends BaseController
 
     	if ($this->onPost($eventModel)) {
 
-    		$this->setFlashEntrySuccess();
+    		$this->setFlashEntrySuccess('Event successfully created.');
 
     		return $this->redirect(['/admin/events']);
     	}
