@@ -2,76 +2,23 @@
 
 namespace app\models;
 
-use Yii;
+use yii\db\ActiveQuery;
+use app\models\BaseRegistration;
 
-/**
- * This is the model class for table "registration".
- *
- * @property int $id
- * @property string $first_name
- * @property string $last_name
- * @property string $email_address
- * @property string|null $phone_number
- * @property string $gender
- * @property string $street
- * @property string $city
- * @property string $country
- * @property int $zipcode
- *
- * @property RegistrationEvent[] $registrationEvents
+/*
+ * Created this to avoid getting override the added rules from the parent model
+ * when updating the parent models
  */
-class Registration extends \yii\db\ActiveRecord
+class Registration extends BaseRegistration
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'registration';
-    }
+	public function rules()
+	{
+		$rules = parent::rules();
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['first_name', 'last_name', 'email_address', 'gender', 'street', 'city', 'country', 'zipcode'], 'required'],
-            [['street'], 'string'],
-            [['zipcode'], 'integer'],
-            [['first_name', 'last_name', 'email_address', 'phone_number', 'city', 'country'], 'string', 'max' => 45],
-            ['email_address', 'email'],
-            ['email_address', 'unique', 'message' => 'Email address already exists'],
-            [['gender'], 'string', 'max' => 10],
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'first_name' => 'First Name',
-            'last_name' => 'Last Name',
-            'email_address' => 'Email Address',
-            'phone_number' => 'Phone Number',
-            'gender' => 'Gender',
-            'street' => 'Street',
-            'city' => 'City',
-            'country' => 'Country',
-            'zipcode' => 'Zipcode',
-        ];
-    }
-
-    /**
-     * Gets query for [[RegistrationEvents]].
-     *
-     * @return \yii\db\ActiveQuery
-     */
-    public function getRegistrationEvents()
-    {
-        return $this->hasMany(RegistrationEvent::className(), ['registration_id' => 'id']);
-    }
+		//your additional rules here
+		return array_merge($rules, [
+			['email_address', 'email'],
+			['email_address', 'unique', 'message' => 'Email address already exists'],
+		]);
+	}
 }

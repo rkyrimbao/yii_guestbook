@@ -7,6 +7,7 @@ use app\models\Event;
 use app\models\RegistrationEvent;
 
 use yii\db\Query;
+use yii\web\HttpException;
 
 class EventController extends BaseController
 {
@@ -20,7 +21,8 @@ class EventController extends BaseController
     	$events = Event::find()->all();
 
         return $this->render($this->indexTemplate, array(
-        	'events' => $events
+        	'events' => $events,
+            'eventStatusChoices' => Event::getStatusChoices()
         ));
     }
 
@@ -87,6 +89,44 @@ class EventController extends BaseController
 
     }
     
+    public function actionPublish()
+    {
+        $event = $this->getEvent();
+
+        try {
+
+            $this->setFlashEntrySuccess('Event successfully published');
+
+            $event->status = Event::STATUS_PUBLISHED;
+            $event->save(false);
+
+        }
+        catch (\Exception $e) {
+            throw new HttpException(405, 'Error saving model'); 
+        }
+
+        return $this->redirect($this->getAppReferrer() ?: 'admin/events');
+    }
+
+    public function actionUnpublish()
+    {
+        $event = $this->getEvent();
+
+        try {
+
+            $event->status = Event::STATUS_UNPUBLISHED;
+            $event->save(false);
+
+            $this->setFlashEntrySuccess('Event successfully unpublished');
+        }
+        catch (\Exception $e) {
+            throw new HttpException(405, 'Error saving model');
+        }
+
+
+        return $this->redirect($this->getAppReferrer() ?: 'admin/events');
+    }
+
     protected function getEvent()
     {
     	return Event::findOne($this->getAppRequest()->getQueryParam('eventId'));

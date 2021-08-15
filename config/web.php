@@ -91,6 +91,8 @@ $config = [
                 '/admin/events/<eventId:\d+>/view' => 'backend/event/view',
                 '/admin/events/<eventId:\d+>/edit' => 'backend/event/edit',
                 '/admin/events/<eventId:\d+>/delete' => 'backend/event/delete',
+                '/admin/events/<eventId:\d+>/unpublish' => 'backend/event/unpublish',
+                '/admin/events/<eventId:\d+>/publish' => 'backend/event/publish',
                 # Reports
                 '/admin/reports' => 'backend/report',
                 # Registered Event
