@@ -21,7 +21,8 @@ class DefaultController extends \yii\web\Controller
 	{
 		$registration = new Registration();
         
-        $events = Event::find()->all();
+        $guests = Registration::find()->orderBy([new \yii\db\Expression("id desc")])->all();
+        $events = Event::find()->orderBy([new \yii\db\Expression("event_date asc")])->all();
 
         $eventsData = array();
 
