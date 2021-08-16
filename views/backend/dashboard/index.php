@@ -49,14 +49,23 @@
 				<div class="text-right">
 					<div class="btn-group">
 						<button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-							Generate Reports
+							Generate Report
 						</button>
 							<div class="dropdown-menu">
-								<?php foreach ($events as $iEvent) : ?>
-									<a 
-										class="dropdown-item" 
-										href="<?= sprintf('/admin/reports/event-%s/generate', $iEvent->id) ?>"><?= $iEvent->name ?></a>
-								<?php endforeach; ?>
+								<?php if (!empty($events)) : ?>
+
+									<?php foreach ($events as $iEvent) : ?>
+										<a 
+											class="dropdown-item" 
+											href="<?= sprintf('/admin/reports/event-%s/generate', $iEvent->id) ?>"
+										><?= $iEvent->name ?></a>
+									<?php endforeach; ?>
+
+								<?php else : ?>
+
+									<a href="#" class="dropdown-item">No events to generate</a>
+									
+								<?php endif; ?>
 							</div>
 					</div>
 				</div>

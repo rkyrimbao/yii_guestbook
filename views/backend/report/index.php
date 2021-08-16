@@ -23,19 +23,27 @@ use yii\bootstrap4\LinkPager;
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach ($events as $event) : ?>
-			<tr>
-				<td><?= $event->id ?></td>
-				<td class="justify-content-between align-items-cente">
-					<?= $event->name ?>
-					<a href="<?= sprintf('/admin/reports/event-%s/generate', $event->id) ?>" class="float-right"> Generate Report
-						<span class="badge badge-primary badge-pill">
-							<?= count($event->registrationEvents) ?>
-						</span>
-					</a>
-				</td>
-			</tr>
-		<?php endforeach; ?>
+		<?php if (!empty($events)) : ?>
+
+			<?php foreach ($events as $event) : ?>
+				<tr>
+					<td><?= $event->id ?></td>
+					<td class="justify-content-between align-items-cente">
+						<?= $event->name ?>
+						<a href="<?= sprintf('/admin/reports/event-%s/generate', $event->id) ?>" class="float-right"> Generate Report
+							<span class="badge badge-primary badge-pill">
+								<?= count($event->registrationEvents) ?>
+							</span>
+						</a>
+					</td>
+				</tr>
+			<?php endforeach; ?>
+
+		<?php else : ?>
+
+			<tr><td colspan="2">No events to generate</td></tr>
+
+		<?php endif; ?>
 	</tbody>
 </table>
 
