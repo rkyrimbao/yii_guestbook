@@ -14,7 +14,7 @@ class ReportController extends BaseController
     	$rowsPerPage = $this->getAppRequest()->getQueryParam('per-page', 30);
 
     	$query = Event::find()
-    		->joinWith('registrationEvents')
+    		// ->joinWith('registrationEvents')
     		->innerJoinWith('registrationEvents') # Get events with guests only
     		->groupBy(['id']);
     		
@@ -45,7 +45,7 @@ class ReportController extends BaseController
         $rowsPerPage = $this->getAppRequest()->getQueryParam('per-page', 30);
 
         $query = Event::find()
-            ->joinWith('registrationEvents')
+            // ->joinWith('registrationEvents')
             ->innerJoinWith('registrationEvents') # Get events with guests only
             ->groupBy(['id']);
             
