@@ -12,9 +12,23 @@ $baseUrl = sprintf('/admin/reports/event-%s/generate', $event->id);
 ?>
 
 <div class="row justify-content-center">
-	<div class="col-10"><h1><?= $event->name ?>  Reports</h1></div>
+	<div class="col-8"><h1><?= $event->name ?>  Reports</h1></div>
 	<div class="col-2 text-right">
-		<a href="<?= sprintf('/admin/reports/export-to-excel?event-id=%s&page=%s&per-page=%s', $event->id, $page, $rowsPerPage) ?>" class="btn btn-primary">Export to Excel</a>
+		<div class="btn-group">
+			<button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Switch Events
+			</button>
+				<div class="dropdown-menu">
+					<?php foreach ($events as $iEvent) : ?>
+						<a 
+							class="dropdown-item" 
+							href="<?= sprintf('/admin/reports/event-%s/generate', $iEvent->id) ?>"><?= $iEvent->name ?></a>
+					<?php endforeach; ?>
+				</div>
+		</div>
+	</div>
+	<div class="col-2 text-right">
+		<a href="<?= sprintf('/admin/reports/export-to-excel?event-id=%s&page=%s&per-page=%s', $event->id, $page, $rowsPerPage) ?>" class="btn btn-outline-secondary">Export to Excel</a>
 	</div>
 </div>
 
@@ -68,16 +82,20 @@ $baseUrl = sprintf('/admin/reports/event-%s/generate', $event->id);
 		</tr>
 	</thead>
 	<tbody>
-		<?php foreach ($guests as $key => $guest) : ?>
-			<tr>
-				<td><?= $key + 1 ?></td>
-				<td><?= $guest->id ?></td>
-				<td><?= sprintf('%s, %s', $guest->last_name, $guest->first_name) ?></td>
-				<td><?= sprintf('%s, %s, %s %s', $guest->street, $guest->city, $guest->country, $guest->zipcode) ?></td>
-				<td><?= $guest->email_address ?></td>
-				<td><?= $guest->phone_number ?></td>
-			</tr>
-		<?php endforeach; ?>
+		<?php if (!empty($guests)) : ?>
+			<?php foreach ($guests as $key => $guest) : ?>
+				<tr>
+					<td><?= $key + 1 ?></td>
+					<td><?= $guest->id ?></td>
+					<td><?= sprintf('%s, %s', $guest->last_name, $guest->first_name) ?></td>
+					<td><?= sprintf('%s, %s, %s %s', $guest->street, $guest->city, $guest->country, $guest->zipcode) ?></td>
+					<td><?= $guest->email_address ?></td>
+					<td><?= $guest->phone_number ?></td>
+				</tr>
+			<?php endforeach; ?>
+		<?php else : ?>
+			<tr><td colspan="6">No participating guests.</td></tr>
+		<?php endif; ?>
 	</tbody>
 </table>
 
@@ -86,3 +104,7 @@ $baseUrl = sprintf('/admin/reports/event-%s/generate', $event->id);
 		'pagination' => $pagination
 	]) ?>
 </nav>
+
+<?php
+	$this->registerJsFile("@web/js/plugins/popper.min.js", ['depends' => [\yii\web\JqueryAsset::class]]);
+?>

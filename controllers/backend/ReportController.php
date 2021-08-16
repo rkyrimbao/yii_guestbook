@@ -57,8 +57,13 @@ class ReportController extends BaseController
             ->limit($pagination->limit)
             ->all();
 
+        $events = Event::find()
+            // ->where(['is_published' => Event::STATUS_PUBLISHED])
+            ->all();
+
         return $this->render('generate', array(
             'event' => $event,
+            'events' => $events,
             'page' => $page,
             'guests' => $guests,
             'pagination' => $pagination,
