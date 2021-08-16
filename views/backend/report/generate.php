@@ -12,8 +12,8 @@ $baseUrl = sprintf('/admin/reports/event-%s/generate', $event->id);
 ?>
 
 <div class="row justify-content-center">
-	<div class="col-6"><h1>Reports</h1></div>
-	<div class="col-6 text-right">
+	<div class="col-10"><h1><?= $event->name ?>  Reports</h1></div>
+	<div class="col-2 text-right">
 		<a href="<?= sprintf('/admin/reports/export-to-excel?event-id=%s&page=%s&per-page=%s', $event->id, $page, $rowsPerPage) ?>" class="btn btn-primary">Export to Excel</a>
 	</div>
 </div>

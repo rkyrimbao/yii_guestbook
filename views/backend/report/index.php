@@ -6,7 +6,7 @@ use yii\bootstrap4\LinkPager;
 ?>
 
 <div class="row justify-content-center">
-	<div class="col-6"><h1>Reports</h1></div>
+	<div class="col-6"><h1>Event Reports</h1></div>
 	<div class="col-6 text-right">
 		
 	</div>
