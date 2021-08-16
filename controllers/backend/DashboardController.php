@@ -3,6 +3,7 @@
 namespace app\controllers\backend;
 
 use app\controllers\backend\BaseController;
+use app\models\Event;
 use app\models\Registration;
 use yii\helpers\Json;
 use yii\helpers\Url;
@@ -27,8 +28,13 @@ class DashboardController extends BaseController
 
     	$suggestions['suggestions'] = $searchSuggestions;
     	
+        $events = Event::find()
+            // ->where(['is_published' => Event::STATUS_PUBLISHED])
+            ->all();
+
         return $this->render($this->indexTemplate, array(
-        	'searchSuggestions' => Json::encode($suggestions)
+        	'searchSuggestions' => Json::encode($suggestions),
+            'events' => $events
         ));
     }
 }

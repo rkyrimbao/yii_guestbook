@@ -47,14 +47,25 @@
 				<h5 class="card-title">Reports</h5>
 				<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
 				<div class="text-right">
-					<a href="/admin/reports" class="btn btn-outline-primary btn-sm">View Reports</a>
+					<div class="btn-group">
+						<button type="button" class="btn btn-outline-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Generate Reports
+						</button>
+							<div class="dropdown-menu">
+								<?php foreach ($events as $iEvent) : ?>
+									<a 
+										class="dropdown-item" 
+										href="<?= sprintf('/admin/reports/event-%s/generate', $iEvent->id) ?>"><?= $iEvent->name ?></a>
+								<?php endforeach; ?>
+							</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 <?php
-
+	$this->registerJsFile("@web/js/plugins/popper.min.js", ['depends' => [\yii\web\JqueryAsset::class]]);
 	$this->registerJsFile("@web/js/plugins/typeahead.js", ['depends' => [\yii\web\JqueryAsset::class]]);
 	$this->registerJsFile("@web/js/backend/search_guest_widget.js", ['depends' => [\yii\web\JqueryAsset::class]]);
 
