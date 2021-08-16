@@ -3,54 +3,16 @@
 // use yii\widgets\LinkPager; 
 use yii\bootstrap4\LinkPager;
 
-$rowsPerPage30 = 30;
-$rowsPerPage60 = 60;
-$rowsPerPage90 = 90;
-
 ?>
 
 <div class="row justify-content-center">
 	<div class="col-6"><h1>Reports</h1></div>
 	<div class="col-6 text-right">
-		<a href="<?= sprintf('/admin/reports/export-to-excel?page=%s&per-page=%s', $page, $rowsPerPage) ?>" class="btn btn-primary">Export to Excel</a>
+		
 	</div>
 </div>
 
 <hr>
-
-<nav class="navbar navbar-light bg-light">
-  <form class="form-inline">
-  	Show :&nbsp;
-    <a 
-    	href="<?= sprintf('/admin/reports?page=%s&per-page=%s', $page, $rowsPerPage30) ?>" 
-    	<?php if ($rowsPerPage == $rowsPerPage30) : ?>
-    		class="btn btn-sm btn-outline-success active"
-    	<?php else: ?>
-    		class="btn btn-sm btn-outline-success"
-    	<?php endif; ?>
-    >30</a>&nbsp;
-
-    <a 
-    	href="<?= sprintf('/admin/reports?page=%s&per-page=%s', $page, $rowsPerPage60) ?>" 
-    	<?php if ($rowsPerPage == $rowsPerPage60) : ?>
-    		class="btn btn-sm btn-outline-success active"
-    	<?php else: ?>
-    		class="btn btn-sm btn-outline-success"
-    	<?php endif; ?>
-    >60</a>&nbsp;
-
-    <a 
-    	href="<?= sprintf('/admin/reports?page=%s&per-page=%s', $page, $rowsPerPage90) ?>" 
-    	<?php if ($rowsPerPage == $rowsPerPage90) : ?>
-    		class="btn btn-sm btn-outline-success active"
-    	<?php else: ?>
-    		class="btn btn-sm btn-outline-success"
-    	<?php endif; ?>
-    >90</a>
-  </form>
-</nav>
-
-<br>
 
 <table class="table table-hover table-bordered">
 	<caption>List of Events</caption>
@@ -58,7 +20,7 @@ $rowsPerPage90 = 90;
 		<tr>
 			<th scope="col">#</th>
 			<th scope="col">Event Name</th>
-			<th>List of Guests</th>
+			<!-- <th>List of Guests</th> -->
 		</tr>
 	</thead>
 	<tbody>
@@ -67,10 +29,14 @@ $rowsPerPage90 = 90;
 				<td><?= $event->id ?></td>
 				<td class="justify-content-between align-items-cente">
 					<?= $event->name ?>
-					<span class="badge badge-primary badge-pill float-right"><?= count($event->registrationEvents) ?></span>
+					<a href="<?= sprintf('/admin/reports/event-%s/generate', $event->id) ?>" class="float-right"> Generate Report
+						<span class="badge badge-primary badge-pill">
+							<?= count($event->registrationEvents) ?>
+						</span>
+					</a>
 				</td>
-				<td>
-					<?php 
+				<!-- <td> -->
+					<!-- <?php 
 
 						$paricipatingGuestsInEvent = $event->registrationEvents;
 
@@ -93,8 +59,8 @@ $rowsPerPage90 = 90;
 
 						endif;
 
-					?>
-				</td>
+					?> -->
+				<!-- </td> -->
 			</tr>
 		<?php endforeach; ?>
 	</tbody>

@@ -94,6 +94,7 @@ $config = [
                 '/admin/events/<eventId:\d+>/unpublish' => 'backend/event/unpublish',
                 '/admin/events/<eventId:\d+>/publish' => 'backend/event/publish',
                 # Reports
+                '/admin/reports/event-<event-id:\d+>/generate' => 'backend/report/generate',
                 '/admin/reports' => 'backend/report',
                 '/admin/reports/export-to-excel' => 'backend/report/exporttoxcel',
                 #'/admin/reports/<page:\d+>/page' => 'backend/report',
